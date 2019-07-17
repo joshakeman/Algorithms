@@ -7,12 +7,18 @@ def find_max_profit(prices):
   lowest = prices[0]
   profit = 0
 
-  for i in prices[1:]:
+
+  for i in range(0, len(prices) - 1):
+    # print(i)
+
     if prices[i] < lowest:
       lowest = prices[i] 
     else:
       if (prices[i] - lowest) > profit:
         profit = prices[i] - lowest
+  
+  if profit == 0 :
+    profit = max(prices[1:]) - prices[0]
 
   return profit
 
