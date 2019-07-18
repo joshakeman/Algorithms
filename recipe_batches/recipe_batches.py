@@ -3,7 +3,18 @@
 import math
 
 def recipe_batches(recipe, ingredients):
-  pass 
+  limiter = 999999
+
+  for i in recipe:
+    if i in ingredients:
+      # print ((ingredients[i] // recipe[i]))
+      if ingredients[i] // recipe[i] < limiter:
+        limiter = ingredients[i] // recipe[i]
+    else:
+      print(0)
+      return 0
+  
+  return limiter
 
 
 if __name__ == '__main__':
