@@ -7,29 +7,44 @@ Item = namedtuple('Item', ['index', 'size', 'value'])
 
 def knapsack_solver(items, capacity):
 
-  sack = []
+  sack = {'Value': 0, 'Chosen': []}
+  picked = []
+  value = 0
   total = 0
-  best = items[0]
-  print("Sack at start: ", sack)
+  # best = [0, 0, 0]
+  # print("Sack at start: ", sack)
   # while total < capacity:
 
   while total < capacity:
+    best = items[0]
     for i in items:
       # print (i[2] - i[1])
       if i[2] - i[1] > best[2] - best[1]:
         best = i
 
-    sack.append(best)
-    total += best[2]
-    items.remove(items[best[0] - 1 ])
+    if best[1] + total < capacity:
+      picked.append(best[0])
+      value += best[2]
+      print (picked)
+      print (value)
+      total += best[1]
+      items.remove(best)
+    else:
+      ordered = sorted(picked)
+      sack['Value'] = value
+      sack['Chosen'] = ordered
+      return sack
+    
+    best = items[0]
     # print("Sack after: ", sack)
     # print(items)
     # print(total)
 
     # print(items[best[0] -1 ])
   
-  print(sack)
-  return sack
+  # print(total)
+  # print(sack)
+  # return sack
   
 
 if __name__ == '__main__':
